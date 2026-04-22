@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="ru" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxury Real Estate Bishkek</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;family=Lora:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .font-display { font-family: 'Lora', serif; }
+    .font-body { font-family: 'Montserrat', system-ui, sans-serif; }
+    html, body { height: 100%; }
+    body { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); }
+    .header-glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+    .property-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; border-radius: 12px; }
+    .property-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); }
+    .property-image { width: 100%; height: 240px; object-fit: cover; transition: transform 0.6s ease-out; }
+    .property-card:hover .property-image { transform: scale(1.08); }
+    @keyframes slideInLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-slide-in { animation: slideInLeft 0.6s ease-out forwards; }
+    .animate-fade-in { animation: fadeInUp 0.6s ease-out forwards; }
+    .status-new { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+    .status-в-работе { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; }
+    .status-завершено { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; }
+    .nav-link { position: relative; transition: color 0.3s ease; }
+    .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #1e40af; transition: width 0.3s ease; }
+    .nav-link:hover::after { width: 100%; }
+    .gradient-text { background: linear-gradient(135deg, #1e40af 0%, #0369a1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .btn-primary { background: linear-gradient(135deg, #1e40af 0%, #0369a1 100%); transition: all 0.3s ease; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(30, 64, 175, 0.3); }
+    .card-luxury { background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 1px solid rgba(30, 64, 175, 0.1); border-radius: 12px; transition: all 0.3s ease; }
+    .card-luxury:hover { border-color: rgba(30, 64, 175, 0.3); box-shadow: 0 15px 40px rgba(30, 64, 175, 0.1); }
+    .language-toggle { display: flex; gap: 8px; background: rgba(30, 64, 175, 0.1); padding: 4px; border-radius: 6px; }
+    .lang-btn { padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600; transition: all 0.3s ease; }
+    .lang-btn.active { background: #1e40af; color: white; }
+    .lang-btn:not(.active) { color: #64748b; }
+    .social-links { display: flex; gap: 12px; }
+    .social-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(30, 64, 175, 0.1); border-radius: 8px; color: #1e40af; transition: all 0.3s ease; text-decoration: none; }
+    .social-icon:hover { background: #1e40af; color: white; transform: translateY(-3px); }
+    .review-card { background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 1px solid rgba(30, 64, 175, 0.1); border-radius: 12px; transition: all 0.3s ease; }
+    .review-card:hover { border-color: rgba(30, 64, 175, 0.3); box-shadow: 0 10px 30px rgba(30, 64, 175, 0.08); }
+    .stars { color: #f59e0b; font-size: 14px; letter-spacing: 2px; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full font-body text-slate-800 overflow-auto">
+  <div class="w-full h-full flex flex-col">
+   <header class="header-glass sticky top-0 z-50 w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex items-center justify-between h-20">
+      <div class="flex items-center gap-3">
+       <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center shadow-lg">
+        <i data-lucide="building-2" class="w-7 h-7 text-white"></i>
+       </div>
+       <div>
+        <div id="company_name" class="font-display text-xl font-bold gradient-text">
+         LUXURY MANAS
+        </div>
+        <div class="text-xs text-slate-500" data-lang-ru="Лучшие объекты Манаса" data-lang-ky="Манастын эң жакшы объектилери">
+         Лучшие объекты Манаса
+        </div>
+       </div>
+      </div>
+      <nav class="hidden lg:flex items-center gap-8">
+       <a href="#properties" data-lang-ru="Объекты" data-lang-ky="Обьектилер" class="nav-link text-slate-700 hover:text-blue-600 font-medium transition">Объекты</a> <a href="#clients" data-lang-ru="Клиенты" data-lang-ky="Клиенттер" class="nav-link text-slate-700 hover:text-blue-600 font-medium transition">Клиенты</a> <a href="#calculator" data-lang-ru="Калькулятор" data-lang-ky="Калькулятор" class="nav-link text-slate-700 hover:text-blue-600 font-medium transition">Калькулятор</a> <a href="#construction" data-lang-ru="Строительство" data-lang-ky="Курулуш" class="nav-link text-slate-700 hover:text-blue-600 font-medium transition">Строительство</a> <a href="#reviews" data-lang-ru="Отзывы" data-lang-ky="Пикирлер" class="nav-link text-slate-700 hover:text-blue-600 font-medium transition">Отзывы</a>
+      </nav>
+      <div class="flex items-center gap-4">
+       <div class="language-toggle">
+        <button class="lang-btn active" onclick="setLanguage('ru')">РУС</button> <button class="lang-btn" onclick="setLanguage('ky')">КЫР</button>
+       </div><button onclick="toggleChat()" class="btn-primary text-white px-5 py-2.5 rounded-lg font-semibold flex items-center gap-2 shadow-lg"> <i data-lucide="message-circle" class="w-4 h-4"></i> <span data-lang-ru="Консультант" data-lang-ky="Консультант" class="hidden sm:inline">Консультант</span> </button>
+      </div>
+     </div>
+    </div>
+   </header>
+   <section class="relative py-20 px-4 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 overflow-hidden">
+    <div class="absolute inset-0 opacity-30">
+     <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
+     <div class="absolute top-40 right-10 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl"></div>
+    </div>
+    <div class="max-w-7xl mx-auto relative z-10">
+     <div class="text-center">
+      <h1 class="font-display text-5xl md:text-6xl font-bold text-white mb-4 leading-tight"><span data-lang-ru="Найдите идеальную" data-lang-ky="Идеалдуу табыңыз">Найдите идеальную</span><br><span class="gradient-text" data-lang-ru="недвижимость в городе Манас" data-lang-ky="Манас шаарындагы жилищин">недвижимость в городе Манас</span></h1>
+      <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto" data-lang-ru="Более 500+ премиум объектов на любой бюджет. Профессиональное агентство с 15+ годами опыта." data-lang-ky="500+ премиум объектилер бардык бюджет үчүн. 15+ жылдык тажрыйбасы бар кесипке ылайык агентство.">Более 500+ премиум объектов на любой бюджет. Профессиональное агентство с 15+ годами опыта.</p><button onclick="document.getElementById('properties').scrollIntoView({behavior:'smooth'})" class="btn-primary text-white px-8 py-4 rounded-lg font-bold text-lg inline-flex items-center gap-2 shadow-2xl"> <i data-lucide="search" class="w-5 h-5"></i> <span data-lang-ru="Смотреть объекты" data-lang-ky="Объектилерди көрүү">Смотреть объекты</span> </button>
+     </div>
+    </div>
+   </section>
+   <section id="properties" class="py-20 px-4">
+    <div class="max-w-7xl mx-auto">
+     <div class="text-center mb-12">
+      <h2 class="font-display text-4xl font-bold text-slate-900 mb-3" data-lang-ru="Популярные объекты" data-lang-ky="Популярдуу объектилер">Популярные объекты</h2>
+      <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto"></div>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="properties-grid">
+      <!-- Properties will be loaded here -->
+     </div>
+    </div>
+   </section>
+   <section id="clients" class="py-16 px-4 bg-white">
+    <div class="max-w-7xl mx-auto">
+     <h2 class="font-display text-3xl font-bold text-slate-900 mb-8" data-lang-ru="Управление клиентами" data-lang-ky="Клиенттерди башкаруу">Управление клиентами</h2>
+     <div class="grid lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2">
+       <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+        <h3 class="font-semibold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="users" class="w-5 h-5"></i> <span data-lang-ru="Список клиентов" data-lang-ky="Клиенттер тизмеси">Список клиентов</span></h3>
+        <div id="clients-list" class="space-y-3">
+         <div class="text-center py-8 text-slate-500" data-lang-ru="Пока нет клиентов" data-lang-ky="Азыр клиент жок">
+          Пока нет клиентов
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-amber-50 rounded-xl p-6 border border-amber-200">
+       <h3 class="font-semibold text-slate-900 mb-4" data-lang-ru="Добавить клиента" data-lang-ky="Клиент кошуу">Добавить клиента</h3>
+       <form onsubmit="handleAddClient(event)" class="space-y-3">
+        <input type="text" id="client-name" placeholder="Имя клиента" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" required> <input type="tel" id="client-phone" placeholder="Телефон" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" required> <select id="client-status" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm"> <option value="новый">Новый</option> <option value="в работе">В работе</option> <option value="завершено">Завершено</option> </select> <button type="submit" class="w-full py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-medium text-sm">Добавить</button>
+       </form>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section id="calculator" class="py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+     <h2 class="font-display text-3xl font-bold text-slate-900 mb-8" data-lang-ru="Калькулятор стоимости" data-lang-ky="Баа калькулятору">Калькулятор стоимости</h2>
+     <div class="grid lg:grid-cols-2 gap-8">
+      <div class="bg-white rounded-xl p-6 border border-slate-200">
+       <h3 class="font-semibold text-slate-900 mb-4" data-lang-ru="Параметры" data-lang-ky="Параметрлер">Параметры</h3>
+       <div class="space-y-4">
+        <div><label class="text-sm font-medium text-slate-700 mb-2 block" data-lang-ru="Площадь (м²)" data-lang-ky="Аймак (м²)">Площадь (м²)</label><input type="number" id="calc-area" value="100" min="1" class="w-full px-4 py-2 border border-slate-200 rounded-lg" oninput="updateCalculator()">
+        </div>
+        <div><label class="text-sm font-medium text-slate-700 mb-2 block" data-lang-ru="Цена за м² (сом)" data-lang-ky="м² үчүн баа">Цена за м² (сом)</label><input type="number" id="calc-price" value="20000" min="1000" class="w-full px-4 py-2 border border-slate-200 rounded-lg" oninput="updateCalculator()">
+        </div>
+        <div><label class="text-sm font-medium text-slate-700 mb-2 block" data-lang-ru="Комиссия (%)" data-lang-ky="Комиссия (%)">Комиссия (%)</label><input type="number" id="calc-commission" value="3" min="0" max="100" class="w-full px-4 py-2 border border-slate-200 rounded-lg" oninput="updateCalculator()">
+        </div>
+        <div><label class="text-sm font-medium text-slate-700 mb-2 block" data-lang-ru="Доп. расходы" data-lang-ky="Кошумча">Доп. расходы</label><input type="number" id="calc-extra" value="50000" min="0" class="w-full px-4 py-2 border border-slate-200 rounded-lg" oninput="updateCalculator()">
+        </div>
+       </div>
+      </div>
+      <div class="bg-gradient-to-br from-amber-50 to-amber-100 rounded-xl p-6 border border-amber-200">
+       <h3 class="font-semibold text-slate-900 mb-6" data-lang-ru="Результат" data-lang-ky="Натыйжа">Результат</h3>
+       <div class="space-y-4">
+        <div class="bg-white rounded-lg p-4">
+         <div class="text-sm text-slate-600 mb-1" data-lang-ru="Базовая стоимость" data-lang-ky="Негизги баа">
+          Базовая стоимость
+         </div>
+         <div class="text-2xl font-bold text-slate-900" id="calc-base">
+          2,000,000 сом
+         </div>
+        </div>
+        <div class="bg-white rounded-lg p-4">
+         <div class="text-sm text-slate-600 mb-1" data-lang-ru="Комиссия" data-lang-ky="Комиссия">
+          Комиссия
+         </div>
+         <div class="text-xl font-bold text-amber-600" id="calc-comm-amount">
+          60,000 сом
+         </div>
+        </div>
+        <div class="bg-white rounded-lg p-4">
+         <div class="text-sm text-slate-600 mb-1" data-lang-ru="Расходы" data-lang-ky="Чыгымдар">
+          Расходы
+         </div>
+         <div class="text-xl font-bold text-slate-700" id="calc-extra-amount">
+          50,000 сом
+         </div>
+        </div>
+        <div class="bg-amber-600 rounded-lg p-4 text-white">
+         <div class="text-sm opacity-90 mb-1" data-lang-ru="ИТОГО" data-lang-ky="ЖАЛПЫ">
+          ИТОГО
+         </div>
+         <div class="text-3xl font-bold" id="calc-total">
+          2,110,000 сом
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section id="construction" class="py-16 px-4 bg-white">
+    <div class="max-w-7xl mx-auto">
+     <h2 class="font-display text-3xl font-bold text-slate-900 mb-8" data-lang-ru="Строительные проекты" data-lang-ky="Курулуш долбоорлору">Строительные проекты</h2>
+     <div class="grid lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2">
+       <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+        <h3 class="font-semibold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="clipboard-list" class="w-5 h-5"></i><span data-lang-ru="Активные проекты" data-lang-ky="Активдүү долбоорлор">Активные проекты</span></h3>
+        <div id="construction-list" class="space-y-3">
+         <div class="text-center py-8 text-slate-500" data-lang-ru="Нет проектов" data-lang-ky="Долбоор жок">
+          Нет проектов
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-blue-50 rounded-xl p-6 border border-blue-200">
+       <h3 class="font-semibold text-slate-900 mb-4" data-lang-ru="Создать проект" data-lang-ky="Долбоор түзүү">Создать проект</h3>
+       <form onsubmit="handleConstructionRequest(event)" class="space-y-3">
+        <input type="text" id="const-client" placeholder="Имя клиента" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" required> <input type="tel" id="const-phone" placeholder="Телефон" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" required> <textarea id="const-desc" placeholder="Описание" rows="3" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm"></textarea> <select id="const-type" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm"> <option value="дом">Дом</option> <option value="коттедж">Коттедж</option> <option value="офис">Офис</option> <option value="ремонт">Ремонт</option> </select> <button type="submit" class="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium text-sm flex items-center justify-center gap-2"> <i data-lucide="send" class="w-4 h-4"></i> <span data-lang-ru="Отправить в WhatsApp" data-lang-ky="WhatsApp-та жөнөтүү">Отправить в WhatsApp</span> </button>
+       </form>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section id="reviews" class="py-20 px-4 bg-gradient-to-br from-slate-50 to-blue-50">
+    <div class="max-w-7xl mx-auto">
+     <div class="text-center mb-12">
+      <h2 class="font-display text-4xl font-bold text-slate-900 mb-3" data-lang-ru="Отзывы клиентов" data-lang-ky="Клиент пикирлери">Отзывы клиентов</h2>
+      <div class="w-20 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto"></div>
+     </div>
+     <div id="reviews-container" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="text-center py-8 text-slate-500 col-span-full" data-lang-ru="Загрузка..." data-lang-ky="Жүктөөдө...">
+       Загрузка...
+      </div>
+     </div>
+    </div>
+   </section>
+   <div id="chat-container" class="fixed bottom-0 right-0 w-96 h-96 bg-white rounded-t-2xl shadow-2xl border border-slate-200 hidden flex-col">
+    <div class="bg-amber-500 text-white px-4 py-4 rounded-t-2xl flex items-center justify-between">
+     <div class="flex items-center gap-2"><i data-lucide="message-circle" class="w-5 h-5"></i><span class="font-semibold">Консультант</span>
+     </div><button onclick="toggleChat()" class="hover:bg-amber-600 p-1 rounded"><i data-lucide="x" class="w-5 h-5"></i></button>
+    </div>
+    <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3">
+     <div class="text-sm bg-slate-100 rounded-lg p-3 rounded-tl-none">
+      Привет!  Как я могу вам помочь?
+     </div>
+    </div>
+    <div class="border-t border-slate-200 p-3 flex gap-2">
+     <input type="text" id="chat-input" placeholder="Напишите..." class="flex-1 px-3 py-2 border border-slate-200 rounded-lg text-sm" onkeypress="if(event.key==='Enter') sendChatMessage()"> <button onclick="sendChatMessage()" class="p-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg"><i data-lucide="send" class="w-4 h-4"></i></button>
+    </div>
+   </div>
+   <footer class="bg-slate-900 text-slate-400 py-12 px-4 mt-auto">
+    <div class="max-w-7xl mx-auto">
+     <div class="grid md:grid-cols-4 gap-8 mb-8">
+      <div>
+       <h4 class="text-white font-semibold mb-4">Недвижимость Манас</h4>
+       <p class="text-sm">Ваш надежный партнер в поиске недвижимости</p>
+      </div>
+      <div>
+       <h4 class="text-white font-semibold mb-4">Навигация</h4>
+       <ul class="space-y-2 text-sm">
+        <li><a href="#properties" class="hover:text-amber-500">Объекты</a></li>
+        <li><a href="#clients" class="hover:text-amber-500">Клиенты</a></li>
+        <li><a href="#reviews" class="hover:text-amber-500">Отзывы</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="text-white font-semibold mb-4">Контакты</h4>
+       <p class="text-sm">+996 (312) 999-888</p>
+       <p class="text-sm">info@manas.kg</p>
+      </div>
+      <div>
+       <h4 class="text-white font-semibold mb-4">Соцсети</h4>
+       <div class="social-links"><a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon"><i data-lucide="facebook" class="w-5 h-5"></i></a><a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon"><i data-lucide="instagram" class="w-5 h-5"></i></a><a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-icon"><i data-lucide="twitter" class="w-5 h-5"></i></a><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+       </div>
+      </div>
+     </div>
+     <div class="border-t border-slate-800 pt-8 text-center text-sm">
+      <p>© 2026 Недвижимость Манас. Все права защищены.</p>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+    let allProperties = [];
+    let allClients = [];
+    let allConstructionRequests = [];
+    let allReviews = [];
+    let currentLanguage = 'ru';
+
+    const propertyTemplates = [
+      { title: 'Апартаменты Айтматова, 74', price: 2400000, area: 95, rooms: 3, location: 'Айтматова, 74', type: 'apartment', img: 'https://images.unsplash.com/photo-1545324418-cc4dc06d83d1?w=500&h=300&fit=crop' },
+      { title: 'Дом Ала-Тоо, 125', price: 5800000, area: 280, rooms: 4, location: 'Ала-Тоо, 125', type: 'house', img: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500&h=300&fit=crop' },
+      { title: 'Участок Чолпон-Ата', price: 1200000, area: 1500, rooms: 0, location: 'Чолпон-Ата', type: 'land', img: 'https://images.unsplash.com/photo-1500595046891-9b45226d8a9e?w=500&h=300&fit=crop' },
+      { title: 'Студия Арча, 42 м²', price: 1850000, area: 42, rooms: 1, location: 'Арча, ЖК Новый', type: 'studio', img: 'https://images.unsplash.com/photo-1540932239986-310128078ceb?w=500&h=300&fit=crop' },
+      { title: 'Таунхаус Боконбаева, 35', price: 4500000, area: 220, rooms: 5, location: 'Боконбаева, 35', type: 'townhouse', img: 'https://images.unsplash.com/photo-1570129477492-45a003537e1f?w=500&h=300&fit=crop' },
+      { title: 'Офис Чуй, 150 м²', price: 3200000, area: 150, rooms: 0, location: 'Чуй, 154', type: 'office', img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=500&h=300&fit=crop' },
+      { title: 'Апартаменты Панфилова, 78 м²', price: 1950000, area: 78, rooms: 2, location: 'Панфилова, 98', type: 'apartment', img: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&h=300&fit=crop' },
+      { title: 'Участок Беловодского, 800 м²', price: 680000, area: 800, rooms: 0, location: 'Беловодского, 42', type: 'land', img: 'https://images.unsplash.com/photo-1505143387149-a58fa8e3a90e?w=500&h=300&fit=crop' }
+    ];
+
+    function t(key) {
+      const trans = { ru: {}, ky: {} };
+      return trans[currentLanguage]?.[key] || key;
+    }
+
+    function setLanguage(lang) {
+      currentLanguage = lang;
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      document.querySelectorAll('[data-lang-ru]').forEach(el => {
+        el.textContent = el.getAttribute(`data-lang-${lang}`);
+      });
+      lucide.createIcons();
+    }
+
+    const dataHandler = {
+      onDataChanged(data) {
+        allClients = data.filter(item => item.type === 'client');
+        allConstructionRequests = data.filter(item => item.type === 'construction');
+        allReviews = data.filter(item => item.type === 'review');
+        renderClients();
+        renderConstruction();
+        renderReviews();
+      }
+    };
+
+    window.dataSdk.init(dataHandler).then(() => {
+      const sampleClients = [
+        { type: 'client', title: 'Динара Кожомбаева', clientName: 'Динара Кожомбаева', clientPhone: '+996 552 123 456', status: 'в работе', price: 0, area: 0, rooms: 0, location: 'Бишкек', description: '', createdAt: new Date().toISOString() },
+        { type: 'client', title: 'Алексей Петров', clientName: 'Алексей Петров', clientPhone: '+996 776 234 567', status: 'новый', price: 0, area: 0, rooms: 0, location: 'Бишкек', description: '', createdAt: new Date().toISOString() },
+        { type: 'client', title: 'Гулнара Исакова', clientName: 'Гулнара Исакова', clientPhone: '+996 501 345 678', status: 'завершено', price: 0, area: 0, rooms: 0, location: 'Бишкек', description: '', createdAt: new Date().toISOString() }
+      ];
+
+      const sampleConstruction = [
+        { type: 'construction', title: 'Дом - Азат Жакупов', clientName: 'Азат Жакупов', clientPhone: '+996 312 123 456', description: 'Строительство дома 250 м² с 4 спальнями, гараж', status: 'в работе', price: 0, area: 250, rooms: 4, location: 'Нижний Джалал', createdAt: new Date().toISOString() },
+        { type: 'construction', title: 'Ремонт - Мира Табылдиева', clientName: 'Мира Табылдиева', clientPhone: '+996 555 567 890', description: 'Капитальный ремонт квартиры 120 м²', status: 'в работе', price: 0, area: 120, rooms: 3, location: 'Бишкек', createdAt: new Date().toISOString() },
+        { type: 'construction', title: 'Офис - ООО Инновация', clientName: 'ООО Инновация', clientPhone: '+996 312 999 888', description: 'Офисное здание 500 м² в деловом центре', status: 'в работе', price: 0, area: 500, rooms: 0, location: 'Орто Сай', createdAt: new Date().toISOString() }
+      ];
+
+      const sampleReviews = [
+        { type: 'review', title: 'Замечательный сервис!', clientName: 'Сыргак Адиев', clientPhone: '', description: 'Спасибо за профессиональный подход', rating: 5, price: 0, area: 0, rooms: 0, location: 'Бишкек', status: 'новый', createdAt: new Date().toISOString() },
+        { type: 'review', title: 'Очень доволен!', clientName: 'Айнура Байбекова', clientPhone: '', description: 'Нашли идеальный дом за короткое время', rating: 5, price: 0, area: 0, rooms: 0, location: 'Бишкек', status: 'новый', createdAt: new Date().toISOString() },
+        { type: 'review', title: 'Хороший опыт', clientName: 'Токтоболот Нурбеков', clientPhone: '', description: 'Все было честно и прозрачно', rating: 4, price: 0, area: 0, rooms: 0, location: 'Бишкек', status: 'новый', createdAt: new Date().toISOString() },
+        { type: 'review', title: 'Профессионалы!', clientName: 'Елена Морозова', clientPhone: '', description: 'Помогли со всеми документами быстро', rating: 5, price: 0, area: 0, rooms: 0, location: 'Бишкек', status: 'новый', createdAt: new Date().toISOString() }
+      ];
+
+      setTimeout(async () => {
+        if (allClients.length === 0) for (const client of sampleClients) await window.dataSdk.create(client);
+        if (allConstructionRequests.length === 0) for (const construction of sampleConstruction) await window.dataSdk.create(construction);
+        if (allReviews.length === 0) for (const review of sampleReviews) await window.dataSdk.create(review);
+      }, 500);
+
+      renderProperties();
+      lucide.createIcons();
+    });
+
+    function renderProperties() {
+      const grid = document.getElementById('properties-grid');
+      grid.innerHTML = propertyTemplates.map(prop => `
+        <div class="property-card bg-white border border-slate-200">
+          <img src="${prop.img}" alt="${prop.title}" class="property-image" loading="lazy" onerror="this.style.background='linear-gradient(135deg, #667eea 0%, #764ba2 100%)'; this.alt='Изображение недоступно';">
+          <div class="p-5">
+            <div class="text-sm font-semibold text-blue-600 mb-2">${prop.type.toUpperCase()}</div>
+            <h3 class="font-semibold text-slate-900 mb-2 text-lg">${prop.title}</h3>
+            <p class="text-sm text-slate-600 mb-4">${prop.area} м² ${prop.rooms ? '• ' + prop.rooms + ' комн.' : ''}</p>
+            <div class="flex justify-between items-center">
+              <span class="text-xl font-bold text-blue-600">${prop.price.toLocaleString('ru-RU')} сом</span>
+              <button onclick="addProperty({title:'${prop.title.replace(/'/g, "\\'")}', price:${prop.price}, area:${prop.area}, rooms:${prop.rooms}})" class="p-2 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition"><i data-lucide="plus" class="w-5 h-5"></i></button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function toggleChat() {
+      const chat = document.getElementById('chat-container');
+      chat.classList.toggle('hidden');
+      if (!chat.classList.contains('hidden')) document.getElementById('chat-input').focus();
+    }
+
+    function sendChatMessage() {
+      const input = document.getElementById('chat-input');
+      const message = input.value.trim();
+      if (!message) return;
+      const messagesDiv = document.getElementById('chat-messages');
+      const userMsg = document.createElement('div');
+      userMsg.className = 'text-sm bg-amber-500 text-white rounded-lg p-3 ml-auto max-w-xs';
+      userMsg.textContent = message;
+      messagesDiv.appendChild(userMsg);
+      input.value = '';
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      setTimeout(() => {
+        const botMsg = document.createElement('div');
+        botMsg.className = 'text-sm bg-slate-100 rounded-lg p-3';
+        botMsg.textContent = ['Спасибо! 😊', 'Интересная идея!', 'Могу помочь!'][Math.floor(Math.random() * 3)];
+        messagesDiv.appendChild(botMsg);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }, 500);
+    }
+
+    function handleAddClient(e) {
+      e.preventDefault();
+      window.dataSdk.create({
+        type: 'client',
+        title: document.getElementById('client-name').value,
+        clientName: document.getElementById('client-name').value,
+        clientPhone: document.getElementById('client-phone').value,
+        status: document.getElementById('client-status').value,
+        price: 0, area: 0, rooms: 0, location: 'Бишкек', description: '',
+        createdAt: new Date().toISOString()
+      });
+      e.target.reset();
+    }
+
+    function renderClients() {
+      const list = document.getElementById('clients-list');
+      list.innerHTML = allClients.length === 0 ? '<div class="text-center py-8 text-slate-500">Нет клиентов</div>' : 
+        allClients.map(client => `
+          <div class="bg-white p-4 rounded-lg border border-slate-200 flex items-center justify-between">
+            <div class="flex-1">
+              <div class="font-semibold text-slate-900">${client.clientName}</div>
+              <div class="text-sm text-slate-600">${client.clientPhone}</div>
+              <div class="text-xs mt-2"><span class="status-${client.status.toLowerCase().replace(/\s/g, '-')} px-2 py-1 rounded text-white text-xs">${client.status}</span></div>
+            </div>
+            <button onclick="deleteClient('${client.__backendId}')" class="p-2 hover:bg-red-100 rounded text-red-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+          </div>
+        `).join('');
+      lucide.createIcons();
+    }
+
+    function deleteClient(id) {
+      const client = allClients.find(c => c.__backendId === id);
+      if (client) window.dataSdk.delete(client);
+    }
+
+    function handleConstructionRequest(e) {
+      e.preventDefault();
+      const client = document.getElementById('const-client').value;
+      const phone = document.getElementById('const-phone').value;
+      const desc = document.getElementById('const-desc').value;
+      const type = document.getElementById('const-type').value;
+      const msg = `Здравствуйте! Интересуюсь ${type}: ${client}. Описание: ${desc}. Контакт: ${phone}`;
+      window.open(`https://wa.me/996312999888?text=${encodeURIComponent(msg)}`, '_blank');
+      window.dataSdk.create({
+        type: 'construction', title: `${type} - ${client}`, clientName: client, clientPhone: phone,
+        description: desc, status: 'в работе', price: 0, area: 0, rooms: 0, location: 'Бишкек',
+        createdAt: new Date().toISOString()
+      });
+      e.target.reset();
+    }
+
+    function renderConstruction() {
+      const list = document.getElementById('construction-list');
+      list.innerHTML = allConstructionRequests.length === 0 ? '<div class="text-center py-8 text-slate-500">Нет проектов</div>' :
+        allConstructionRequests.map(req => `
+          <div class="bg-white p-4 rounded-lg border border-blue-200">
+            <div class="flex items-center justify-between mb-2">
+              <div class="font-semibold text-slate-900">${req.title}</div>
+              <span class="status-${req.status.toLowerCase().replace(/\s/g, '-')} px-2 py-1 rounded text-white text-xs">${req.status}</span>
+            </div>
+            <div class="text-sm text-slate-600 mb-2">${req.clientPhone}</div>
+            <div class="text-sm text-slate-700 mb-3">${req.description}</div>
+            <button onclick="deleteConstruction('${req.__backendId}')" class="text-red-600 hover:bg-red-50 rounded text-sm flex items-center gap-1"><i data-lucide="trash-2" class="w-3 h-3"></i>Удалить</button>
+          </div>
+        `).join('');
+      lucide.createIcons();
+    }
+
+    function deleteConstruction(id) {
+      const req = allConstructionRequests.find(r => r.__backendId === id);
+      if (req) window.dataSdk.delete(req);
+    }
+
+    function updateCalculator() {
+      const area = parseFloat(document.getElementById('calc-area').value) || 0;
+      const pricePerM2 = parseFloat(document.getElementById('calc-price').value) || 0;
+      const commission = parseFloat(document.getElementById('calc-commission').value) || 0;
+      const extra = parseFloat(document.getElementById('calc-extra').value) || 0;
+      const base = area * pricePerM2;
+      const commissionAmount = (base * commission) / 100;
+      const total = base + commissionAmount + extra;
+      document.getElementById('calc-base').textContent = base.toLocaleString('ru-RU') + ' сом';
+      document.getElementById('calc-comm-amount').textContent = Math.round(commissionAmount).toLocaleString('ru-RU') + ' сом';
+      document.getElementById('calc-extra-amount').textContent = extra.toLocaleString('ru-RU') + ' сом';
+      document.getElementById('calc-total').textContent = Math.round(total).toLocaleString('ru-RU') + ' сом';
+    }
+
+    function renderReviews() {
+      const container = document.getElementById('reviews-container');
+      container.innerHTML = allReviews.length === 0 ? '<div class="text-center col-span-full py-8 text-slate-500">Отзывы загружаются...</div>' :
+        allReviews.map(review => `
+          <div class="review-card p-6">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <h3 class="font-semibold text-slate-900">${review.clientName}</h3>
+                <p class="text-sm text-slate-600 mt-1">${review.title}</p>
+              </div>
+              <div class="stars">${'★'.repeat(review.rating || 5)}</div>
+            </div>
+            <p class="text-slate-700 text-sm">${review.description}</p>
+          </div>
+        `).join('');
+    }
+
+    updateCalculator();
+    lucide.createIcons();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9eb92951f1d4eebb',t:'MTc3NjA2OTU3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
