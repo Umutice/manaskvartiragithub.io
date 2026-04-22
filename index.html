@@ -1,0 +1,693 @@
+ <!doctype html>
+<html lang="ru" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Элитная Недвижимость</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    .font-display { font-family: 'Playfair Display', Georgia, serif; }
+    .font-body { font-family: 'Inter', system-ui, sans-serif; }
+    .property-card:hover .property-image { transform: scale(1.05); }
+    .property-card:hover { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+    .gradient-overlay { background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.7) 100%); }
+    .search-shadow { box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.3); }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
+    .animate-delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .animate-delay-2 { animation-delay: 0.2s; opacity: 0; }
+    .animate-delay-3 { animation-delay: 0.3s; opacity: 0; }
+    .animate-delay-4 { animation-delay: 0.4s; opacity: 0; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-body bg-slate-50 text-slate-800 overflow-auto">
+  <div class="w-full min-h-full"><!-- Header -->
+   <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex items-center justify-between h-16 md:h-20">
+      <div class="flex items-center gap-2">
+       <div class="w-10 h-10  rounded-lg flex items-center justify-center">
+        
+       </div><span id="site-title" class="font-display text-xl font-semibold text-slate-900">Недвижимость Манас</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-8"><a href="#properties" class="text-slate-600 hover:text-amber-600 transition-colors font-medium">Объекты</a> <a href="#services" class="text-slate-600 hover:text-amber-600 transition-colors font-medium">Услуги</a> <a href="#about" class="text-slate-600 hover:text-amber-600 transition-colors font-medium">О нас</a> <a href="#contact" class="text-slate-600 hover:text-amber-600 transition-colors font-medium">Контакты</a>
+      </nav>
+      <div class="flex items-center gap-4"><a href="tel:996 999" class="hidden sm:flex items-center gap-2 text-slate-700 hover:text-amber-600 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+        </svg><span class="font-medium">996 345 677 844</span> </a> <button class="md:hidden p-2 text-slate-600" onclick="toggleMobileMenu()">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg></button>
+      </div>
+     </div>
+    </div><!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
+     <div class="px-4 py-4 space-y-3"><a href="#properties" class="block py-2 text-slate-600 hover:text-amber-600">Объекты</a> <a href="#services" class="block py-2 text-slate-600 hover:text-amber-600">Услуги</a> <a href="#about" class="block py-2 text-slate-600 hover:text-amber-600">О нас</a> <a href="#contact" class="block py-2 text-slate-600 hover:text-amber-600">Контакты</a>
+     </div>
+    </div>
+   </header><!-- Hero Section -->
+   <section class="relative pt-20 md:pt-24">
+    <div class="relative h-[600px] md:h-[700px] overflow-hidden"><!-- Background with Bishkek image -->
+     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('arka.jpg');"></div>
+     <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-800/80 to-slate-900/70"></div><!-- Decorative Elements -->
+     <div class="absolute top-20 right-10 w-72 h-72 bg-amber-500/20 rounded-full blur-3xl"></div>
+     <div class="absolute bottom-20 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+     <div class="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
+      <div class="w-full max-w-3xl">
+       <div class="animate-fade-in-up"><span class="inline-block px-4 py-2 bg-amber-500/20 text-amber-400 rounded-full text-sm font-medium mb-6">  Более 1000 объектов в базе </span>
+       </div>
+       <h1 id="hero-title" class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 animate-fade-in-up animate-delay-1">Найдите дом своей мечты</h1>
+       <p id="hero-subtitle" class="text-xl md:text-2xl text-slate-300 mb-10 max-w-xl animate-fade-in-up animate-delay-2">Лучшие предложения на рынке Бишкека, Оша и Манаса от проверенных застройщиков и собственников</p><!-- Search Box -->
+       <div class="bg-white rounded-2xl p-4 md:p-6 search-shadow animate-fade-in-up animate-delay-3">
+        <div class="flex flex-wrap gap-4">
+         <div class="flex-1 min-w-[200px]"><label class="block text-sm font-medium text-slate-500 mb-2">Тип сделки</label> <select class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"> <option>Купить</option> <option>Снять</option> <option>Новостройки</option> </select>
+         </div>
+         <div class="flex-1 min-w-[200px]"><label class="block text-sm font-medium text-slate-500 mb-2">Тип недвижимости</label> <select class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"> <option>Квартира</option> <option>Дом</option> <option>Участок</option> <option>Коммерция</option> </select>
+         </div>
+         <div class="flex-1 min-w-[200px]"><label class="block text-sm font-medium text-slate-500 mb-2">Город</label> <select class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"> <option>Бишкек</option> <option>Ош</option> <option>Манас</option> </select>
+         </div>
+         <div class="flex items-end"><button id="cta-button" class="w-full md:w-auto px-8 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-2">
+           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+           </svg> Найти </button>
+         </div>
+        </div>
+       </div><!-- Stats -->
+       <div class="flex flex-wrap gap-8 mt-10 animate-fade-in-up animate-delay-4">
+        <div class="text-center">
+         <div class="text-3xl md:text-4xl font-bold text-white">
+          850+
+         </div>
+         <div class="text-slate-400 text-sm">
+          Объектов
+         </div>
+        </div>
+        <div class="text-center">
+         <div class="text-3xl md:text-4xl font-bold text-white">
+          650+
+         </div>
+         <div class="text-slate-400 text-sm">
+          Клиентов
+         </div>
+        </div>
+        <div class="text-center">
+         <div class="text-3xl md:text-4xl font-bold text-white">
+          12
+         </div>
+         <div class="text-slate-400 text-sm">
+          Лет опыта
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Properties Section -->
+   <section id="properties" class="py-20 md:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16"><span class="inline-block px-4 py-2 bg-amber-100 text-amber-700 rounded-full text-sm font-medium mb-4"> Популярные объекты </span>
+      <h2 class="font-display text-3xl md:text-5xl font-bold text-slate-900 mb-4">Лучшие предложения</h2>
+      <p class="text-xl text-slate-600 max-w-2xl mx-auto">Тщательно отобранные объекты недвижимости, которые соответствуют высоким стандартам качества</p>
+     </div><!-- Filter Tabs -->
+     <div class="flex flex-wrap justify-center gap-3 mb-12"><button class="filter-btn active px-6 py-3 bg-slate-900 text-white rounded-full font-medium transition-all" onclick="filterProperties('all', this)">Все</button> <button class="filter-btn px-6 py-3 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-full font-medium transition-all" onclick="filterProperties('apartment', this)">Квартиры</button> <button class="filter-btn px-6 py-3 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-full font-medium transition-all" onclick="filterProperties('house', this)">Дома</button> <button class="filter-btn px-6 py-3 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-full font-medium transition-all" onclick="filterProperties('land', this)">Участки</button>
+     </div><!-- Properties Grid -->
+     <div id="properties-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"><!-- Property Card 1 -->
+      <div class="property-card group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100" data-type="apartment">
+       <div class="relative h-64 overflow-hidden">
+        <div class="property-image absolute inset-0 bg-cover bg-center transition-transform duration-700" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR81ZEWYLgjO-CDzrjDqhstouMLITiWkcB69Q&s?w=600&amp;h=400&amp;fit=crop');"></div>
+        <div class="absolute top-4 left-4 flex gap-2"><span class="px-3 py-1 bg-amber-500 text-white text-sm font-medium rounded-full">Premium</span>
+        </div>
+        <div class="absolute top-4 right-4"><button class="w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors group/fav">
+          <svg class="w-5 h-5 text-slate-400 group-hover/fav:text-red-500 transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg></button>
+        </div>
+       </div>
+       <div class="p-6">
+        <div class="flex items-start justify-between mb-3">
+         <h3 class="font-display text-xl font-semibold text-slate-900 group-hover:text-amber-600 transition-colors">Апартаменты на мкр.Спутнике</h3>
+        </div>
+        <div class="flex items-center gap-2 text-slate-500 mb-4">
+         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+         </svg><span class="text-sm">Манас, пр. Т.Байзакова</span>
+        </div>
+        <div class="flex items-center gap-4 mb-6 text-sm text-slate-600"><span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+          </svg> 95 м² </span> <span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg> 3 комнаты </span> <span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg> 12 этаж </span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+         <div><span class="text-2xl font-bold text-slate-900"> 4 200 000 сом</span>
+         </div><button class="px-5 py-2 bg-slate-900 hover:bg-amber-500 text-white rounded-xl font-medium transition-all duration-300"> Подробнее </button>
+        </div>
+       </div>
+      </div><!-- Property Card 2 -->
+      <div class="property-card group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100" data-type="house">
+       <div class="relative h-64 overflow-hidden">
+        <div class="property-image absolute inset-0 bg-cover bg-center transition-transform duration-700" style="background-image: url('data:image/jpeg;base64,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');"></div>
+        <div class="absolute top-4 left-4 flex gap-2"><span class="px-3 py-1 bg-emerald-500 text-white text-sm font-medium rounded-full">Новый</span>
+        </div>
+        <div class="absolute top-4 right-4"><button class="w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors group/fav">
+          <svg class="w-5 h-5 text-slate-400 group-hover/fav:text-red-500 transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg></button>
+        </div>
+       </div>
+       <div class="p-6">
+        <div class="flex items-start justify-between mb-3">
+         <h3 class="font-display text-xl font-semibold text-slate-900 group-hover:text-amber-600 transition-colors">Загородный дом </h3>
+        </div>
+        <div class="flex items-center gap-2 text-slate-500 mb-4">
+         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+         </svg><span class="text-sm">город Манас, поселок Барпы</span>
+        </div>
+        <div class="flex items-center gap-4 mb-6 text-sm text-slate-600"><span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+          </svg> 280 м² </span> <span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg> 4 комнаты </span> <span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+          </svg> 15 соток </span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+         <div><span class="text-2xl font-bold text-slate-900">8 500 000 сом</span>
+         </div><button class="px-5 py-2 bg-slate-900 hover:bg-amber-500 text-white rounded-xl font-medium transition-all duration-300"> Подробнее </button>
+        </div>
+       </div>
+      </div><!-- Property Card 3 -->
+      <div class="property-card group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100" data-type="apartment">
+       <div class="relative h-64 overflow-hidden">
+        <div class="property-image absolute inset-0 bg-cover bg-center transition-transform duration-700" style="background-image: url('777.jpg');"></div>
+        <div class="absolute top-4 left-4 flex gap-2"><span class="px-3 py-1 bg-blue-500 text-white text-sm font-medium rounded-full">Вид на море</span>
+        </div>
+        <div class="absolute top-4 right-4"><button class="w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors group/fav">
+          <svg class="w-5 h-5 text-slate-400 group-hover/fav:text-red-500 transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg></button>
+        </div>
+       </div>
+       <div class="p-6">
+        <div class="flex items-start justify-between mb-3">
+         <h3 class="font-display text-xl font-semibold text-slate-900 group-hover:text-amber-600 transition-colors">Апартаменты на СМУ</h3>
+        </div>
+        <div class="flex items-center gap-2 text-slate-500 mb-4">
+         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+         </svg><span class="text-sm">Манас, Центральный рынок</span>
+        </div>
+        <div class="flex items-center gap-4 mb-6 text-sm text-slate-600"><span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+          </svg> 95 м² </span> <span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg> 3 комнаты </span> <span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg> 18 этаж </span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+         <div><span class="text-2xl font-bold text-slate-900">45 000 000 сом</span>
+         </div><button class="px-5 py-2 bg-slate-900 hover:bg-amber-500 text-white rounded-xl font-medium transition-all duration-300"> Подробнее </button>
+        </div>
+       </div>
+      </div><!-- Property Card 4 -->
+      <div class="property-card group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100" data-type="land">
+       <div class="relative h-64 overflow-hidden">
+        <div class="property-image absolute inset-0 bg-cover bg-center transition-transform duration-700" style="background-image: url('888.jpg');"></div>
+        <div class="absolute top-4 left-4 flex gap-2"><span class="px-3 py-1 bg-orange-500 text-white text-sm font-medium rounded-full">ИЖС</span>
+        </div>
+        <div class="absolute top-4 right-4"><button class="w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors group/fav">
+          <svg class="w-5 h-5 text-slate-400 group-hover/fav:text-red-500 transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg></button>
+        </div>
+       </div>
+       <div class="p-6">
+        <div class="flex items-start justify-between mb-3">
+         <h3 class="font-display text-xl font-semibold text-slate-900 group-hover:text-amber-600 transition-colors">Участок</h3>
+        </div>
+        <div class="flex items-center gap-2 text-slate-500 mb-4">
+         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+         </svg><span class="text-sm">Манас, ориентир МедЛайн</span>
+        </div>
+        <div class="flex items-center gap-4 mb-6 text-sm text-slate-600"><span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+          </svg> 50 соток </span> <span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg> Коммуникации </span> <span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+          </svg> Лес рядом </span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+         <div><span class="text-2xl font-bold text-slate-900">75 000 000 сом</span>
+         </div><button class="px-5 py-2 bg-slate-900 hover:bg-amber-500 text-white rounded-xl font-medium transition-all duration-300"> Подробнее </button>
+        </div>
+       </div>
+      </div><!-- Property Card 5 -->
+      <div class="property-card group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100" data-type="apartment">
+       <div class="relative h-64 overflow-hidden">
+        <div class="property-image absolute inset-0 bg-cover bg-center transition-transform duration-700" style="background-image: url('data:image/jpeg;base64,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');"></div>
+        <div class="absolute top-4 left-4 flex gap-2"><span class="px-3 py-1 bg-violet-500 text-white text-sm font-medium rounded-full">Новостройка</span>
+        </div>
+        <div class="absolute top-4 right-4"><button class="w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors group/fav">
+          <svg class="w-5 h-5 text-slate-400 group-hover/fav:text-red-500 transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg></button>
+        </div>
+       </div>
+       <div class="p-6">
+        <div class="flex items-start justify-between mb-3">
+         <h3 class="font-display text-xl font-semibold text-slate-900 group-hover:text-amber-600 transition-colors">Студия в центре</h3>
+        </div>
+        <div class="flex items-center gap-2 text-slate-500 mb-4">
+         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+         </svg><span class="text-sm">Манас, район Сузак</span>
+        </div>
+        <div class="flex items-center gap-4 mb-6 text-sm text-slate-600"><span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+          </svg> 42 м² </span> <span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg> Студия </span> <span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg> 55 этаж </span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+         <div><span class="text-2xl font-bold text-slate-900">28 500 000 сом</span>
+         </div><button class="px-5 py-2 bg-slate-900 hover:bg-amber-500 text-white rounded-xl font-medium transition-all duration-300"> Подробнее </button>
+        </div>
+       </div>
+      </div><!-- Property Card 6 -->
+      <div class="property-card group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100" data-type="house">
+       <div class="relative h-64 overflow-hidden">
+        <div class="property-image absolute inset-0 bg-cover bg-center transition-transform duration-700" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAJv2fTMdIBLNK-9GwlQ22R6qdVfBOonC_Mw&s?w=600&amp;h=400&amp;fit=crop');"></div>
+        <div class="absolute top-4 left-4 flex gap-2"><span class="px-3 py-1 bg-rose-500 text-white text-sm font-medium rounded-full">Эксклюзив</span>
+        </div>
+        <div class="absolute top-4 right-4"><button class="w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors group/fav">
+          <svg class="w-5 h-5 text-slate-400 group-hover/fav:text-red-500 transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg></button>
+        </div>
+       </div>
+       <div class="p-6">
+        <div class="flex items-start justify-between mb-3">
+         <h3 class="font-display text-xl font-semibold text-slate-900 group-hover:text-amber-600 transition-colors">Таунхаус в Манасе</h3>
+        </div>
+        <div class="flex items-center gap-2 text-slate-500 mb-4">
+         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+         </svg><span class="text-sm">Манас, мкр Курманбек</span>
+        </div>
+        <div class="flex items-center gap-4 mb-6 text-sm text-slate-600"><span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+          </svg> 280 м² </span> <span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg> 5 комнат </span> <span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg> 3 этажа </span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+         <div><span class="text-2xl font-bold text-slate-900">89 000 000 сом</span>
+         </div><button class="px-5 py-2 bg-slate-900 hover:bg-amber-500 text-white rounded-xl font-medium transition-all duration-300"> Подробнее </button>
+        </div>
+       </div>
+      </div>
+     </div><!-- View All Button -->
+     <div class="text-center mt-12"><button class="px-8 py-4 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold rounded-xl transition-all duration-300 inline-flex items-center gap-2"> Смотреть все объекты 
+       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+       </svg></button>
+     </div>
+    </div>
+   </section><!-- Services Section -->
+   <section id="services" class="py-20 md:py-28 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16"><span class="inline-block px-4 py-2 bg-amber-100 text-amber-700 rounded-full text-sm font-medium mb-4"> Наши услуги </span>
+      <h2 class="font-display text-3xl md:text-5xl font-bold text-slate-900 mb-4">Полный спектр услуг</h2>
+      <p class="text-xl text-slate-600 max-w-2xl mx-auto">Профессиональное сопровождение на всех этапах сделки с недвижимостью</p>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"><!-- Service 1 -->
+      <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-500 border border-slate-100 hover:border-amber-200">
+       <div class="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-amber-500 transition-colors duration-300">
+        <svg class="w-8 h-8 text-amber-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+       </div>
+       <h3 class="font-display text-xl font-semibold text-slate-900 mb-3">Подбор объектов</h3>
+       <p class="text-slate-600" onclick="location.href='planirovka.pdf'">Индивидуальный подбор недвижимости по вашим критериям и бюджету</p>
+      </div><!-- Service 2 -->
+      <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-500 border border-slate-100 hover:border-amber-200">
+       <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-500 transition-colors duration-300">
+        <svg class="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+       </div>
+       <h3 class="font-display text-xl font-semibold text-slate-900 mb-3">Юридическая проверка</h3>
+       <p class="text-slate-600" onclick="location.href='yuridika.pdf'">Полная проверка документов и юридической чистоты объекта</p>
+      </div><!-- Service 3 -->
+      <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-500 border border-slate-100 hover:border-amber-200">
+       <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-500 transition-colors duration-300">
+        <svg class="w-8 h-8 text-emerald-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+       </div>
+       <h3 class="font-display text-xl font-semibold text-slate-900 mb-3">Ипотечный брокер</h3>
+       <p class="text-slate-600" onclick="location.href='ipoteka.pdf'">Помощь в получении ипотеки на лучших условиях от ведущих банков</p>
+      </div><!-- Service 4 -->
+      <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-500 border border-slate-100 hover:border-amber-200">
+       <div class="w-16 h-16 bg-violet-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-violet-500 transition-colors duration-300">
+        <svg class="w-8 h-8 text-violet-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+       </div>
+       <h3 class="font-display text-xl font-semibold text-slate-900 mb-3">Оформление сделки</h3>
+       <p class="text-slate-600" onclick="location.href='kyr75045.pdf'">Полное сопровождение сделки от переговоров до регистрации права</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- CTA Section -->
+   <section class="py-20 md:py-28 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+     <h2 class="font-display text-3xl md:text-5xl font-bold text-white mb-6">Готовы найти идеальную недвижимость?</h2>
+     <p class="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">Оставьте заявку, и наш специалист свяжется с вами в течение 15 минут для бесплатной консультации</p>
+     <form class="max-w-xl mx-auto" onsubmit="handleFormSubmit(event)">
+      <div class="flex flex-col sm:flex-row gap-4"><input type="text" placeholder="Ваше имя" class="flex-1 px-6 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all" required> <input type="tel" placeholder="996 (___) ___-__-__" class="flex-1 px-6 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all" required>
+      </div><button type="submit" class="w-full sm:w-auto mt-4 px-10 py-4 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105"> Получить консультацию </button>
+     </form>
+     <p class="mt-6 text-sm text-slate-400">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</p>
+    </div>
+   </section><!-- Contact Section -->
+   <section id="contact" class="py-20 md:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div><span class="inline-block px-4 py-2 bg-amber-100 text-amber-700 rounded-full text-sm font-medium mb-4"> Контакты </span>
+       <h2 class="font-display text-3xl md:text-4xl font-bold text-slate-900 mb-6">Свяжитесь с нами</h2>
+       <p class="text-xl text-slate-600 mb-8">Наши специалисты готовы ответить на любые вопросы о недвижимости и помочь вам сделать правильный выбор</p>
+       <div class="space-y-6">
+        <div class="flex items-start gap-4">
+         <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+         </div>
+         <div>
+          <h4 class="font-semibold text-slate-900 mb-1">Телефон</h4><a href="tel:996 345 677 844" class="text-lg text-slate-600 hover:text-amber-600 transition-colors">996 345 677 844</a>
+          <p class="text-sm text-slate-500">Бесплатно по Кыргызстану</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-4">
+         <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+         </div>
+         <div>
+          <h4 class="font-semibold text-slate-900 mb-1">Email</h4><a href="mailto:info@elite-realty.ru" class="text-lg text-slate-600 hover:text-amber-600 transition-colors">info@elite-realty.ru</a>
+          <p class="text-sm text-slate-500">Ответим в течение часа</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-4">
+         <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+         </div>
+         <div>
+          <h4 class="font-semibold text-slate-900 mb-1">Офис</h4>
+          <p class="text-lg text-slate-600">Манас, ул. Кыргызская Республика, 1</p>
+          <p class="text-sm text-slate-500">Пн-Пт: 9:00 - 20:00</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- Contact Form -->
+      <div class="bg-slate-50 p-8 md:p-10 rounded-3xl">
+       <h3 class="font-display text-2xl font-semibold text-slate-900 mb-6">Оставить заявку</h3>
+       <form onsubmit="handleFormSubmit(event)" class="space-y-5">
+        <div><label class="block text-sm font-medium text-slate-700 mb-2">Ваше имя</label> <input type="text" class="w-full px-5 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all" placeholder="Имя" required>
+        </div>
+        <div><label class="block text-sm font-medium text-slate-700 mb-2">Телефон</label> <input type="tel" class="w-full px-5 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all" placeholder="996 999-999-999" required>
+        </div>
+        <div><label class="block text-sm font-medium text-slate-700 mb-2">Что вас интересует?</label> <select class="w-full px-5 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"> <option>Покупка квартиры</option> <option>Покупка дома</option> <option>Аренда</option> <option>Продажа недвижимости</option> <option>Консультация</option> </select>
+        </div>
+        <div><label class="block text-sm font-medium text-slate-700 mb-2">Сообщение</label> <textarea rows="4" class="w-full px-5 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all resize-none" placeholder="Опишите ваши пожелания..."></textarea>
+        </div><button type="submit" class="w-full py-4 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-[1.02]"> Отправить заявку </button>
+       </form>
+      </div>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="bg-slate-900 text-slate-400 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div>
+       <div class="flex items-center gap-2 mb-6">
+        <div class="w-10 h-10 bg-amber-500 rounded-lg flex items-center justify-center">
+         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+         </svg>
+        </div><span class="font-display text-xl font-semibold text-white">Недвижимость Манас</span>
+       </div>
+       <p class="text-slate-400 mb-6">Ваш надёжный партнёр в мире недвижимости с 2009 года</p>
+       <div class="flex gap-4"><a href="#" class="w-10 h-10 bg-slate-800 hover:bg-amber-500 rounded-lg flex items-center justify-center transition-colors">
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+          <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+         </svg></a> <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-amber-500 rounded-lg flex items-center justify-center transition-colors">
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+         </svg></a> <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-amber-500 rounded-lg flex items-center justify-center transition-colors">
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+          <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+         </svg></a> <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-amber-500 rounded-lg flex items-center justify-center transition-colors">
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+         </svg></a>
+       </div>
+      </div>
+      <div>
+       <h4 class="font-semibold text-white mb-6">Недвижимость</h4>
+       <ul class="space-y-3">
+        <li><a href="#" class="hover:text-amber-500 transition-colors">Квартиры</a></li>
+        <li><a href="#" class="hover:text-amber-500 transition-colors">Дома и коттеджи</a></li>
+        <li><a href="#" class="hover:text-amber-500 transition-colors">Земельные участки</a></li>
+        <li><a href="#" class="hover:text-amber-500 transition-colors">Коммерческая недвижимость</a></li>
+        <li><a href="#" class="hover:text-amber-500 transition-colors">Новостройки</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-semibold text-white mb-6">Услуги</h4>
+       <ul class="space-y-3">
+        <li><a href="#" class="hover:text-amber-500 transition-colors">Покупка недвижимости</a></li>
+        <li><a href="#" class="hover:text-amber-500 transition-colors">Продажа недвижимости</a></li>
+        <li><a href="#" class="hover:text-amber-500 transition-colors">Аренда</a></li>
+        <li><a href="#" class="hover:text-amber-500 transition-colors">Ипотечный брокер</a></li>
+        <li><a href="#" class="hover:text-amber-500 transition-colors">Юридические услуги</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-semibold text-white mb-6">Компания</h4>
+       <ul class="space-y-3">
+        <li><a href="#" class="hover:text-amber-500 transition-colors">О компании</a></li>
+        <li><a href="#" class="hover:text-amber-500 transition-colors">Наша команда</a></li>
+        <li><a href="#" class="hover:text-amber-500 transition-colors">Отзывы клиентов</a></li>
+        <li><a href="#" class="hover:text-amber-500 transition-colors">Вакансии</a></li>
+        <li><a href="#" class="hover:text-amber-500 transition-colors">Контакты</a></li>
+       </ul>
+      </div>
+     </div>
+     <div class="mt-12 pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-sm">© 2026 Недвижимость Манас. Все права защищены.</p>
+      <div class="flex gap-6 text-sm"><a href="#" class="hover:text-amber-500 transition-colors">Политика конфиденциальности</a> <a href="#" class="hover:text-amber-500 transition-colors">Пользовательское соглашение</a>
+      </div>
+     </div>
+    </div>
+   </footer><!-- Success Modal -->
+   <div id="success-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center transform scale-95 opacity-0 transition-all duration-300" id="modal-content">
+     <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
+      <svg class="w-10 h-10 text-emerald-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+     </div>
+     <h3 class="font-display text-2xl font-bold text-slate-900 mb-3">Заявка отправлена!</h3>
+     <p class="text-slate-600 mb-6">Наш специалист свяжется с вами в ближайшее время</p><button onclick="closeModal()" class="px-8 py-3 bg-slate-900 hover:bg-amber-500 text-white font-semibold rounded-xl transition-all duration-300"> Отлично </button>
+    </div>
+   </div>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      site_title: 'Элитная Недвижимость',
+      hero_title: 'Найдите дом своей мечты',
+      hero_subtitle: 'Лучшие предложения на рынке недвижимости от проверенных застройщиков и собственников',
+      cta_button: 'Найти',
+      background_color: '#f8fafc',
+      surface_color: '#ffffff',
+      text_color: '#1e293b',
+      primary_action_color: '#f59e0b',
+      secondary_action_color: '#0f172a'
+    };
+    
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          // Update text content
+          document.getElementById('site-title').textContent = config.site_title || defaultConfig.site_title;
+          document.getElementById('hero-title').textContent = config.hero_title || defaultConfig.hero_title;
+          document.getElementById('hero-subtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+          document.getElementById('cta-button').innerHTML = `
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            ${config.cta_button || defaultConfig.cta_button}
+          `;
+          
+          // Update colors
+          const bgColor = config.background_color || defaultConfig.background_color;
+          const surfaceColor = config.surface_color || defaultConfig.surface_color;
+          const textColor = config.text_color || defaultConfig.text_color;
+          const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
+          const secondaryColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+          
+          document.body.style.backgroundColor = bgColor;
+          
+          // Update property cards
+          document.querySelectorAll('.property-card').forEach(card => {
+            card.style.backgroundColor = surfaceColor;
+          });
+          
+          // Update service cards
+          document.querySelectorAll('#services .group').forEach(card => {
+            card.style.backgroundColor = surfaceColor;
+          });
+          
+          // Update headings
+          document.querySelectorAll('h2, h3').forEach(heading => {
+            if (!heading.closest('.bg-gradient-to-br') && !heading.closest('footer')) {
+              heading.style.color = textColor;
+            }
+          });
+          
+          // Update primary buttons
+          document.querySelectorAll('.bg-amber-500').forEach(btn => {
+            btn.style.backgroundColor = primaryColor;
+          });
+          
+          // Update secondary buttons
+          document.querySelectorAll('.bg-slate-900').forEach(btn => {
+            if (!btn.closest('header') && !btn.closest('footer') && !btn.closest('.filter-btn')) {
+              btn.style.backgroundColor = secondaryColor;
+            }
+          });
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => window.elementSdk.setConfig({ background_color: value })
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => window.elementSdk.setConfig({ surface_color: value })
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => window.elementSdk.setConfig({ text_color: value })
+            },
+            {
+              get: () => config.primary_action_color || defaultConfig.primary_action_color,
+              set: (value) => window.elementSdk.setConfig({ primary_action_color: value })
+            },
+            {
+              get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+              set: (value) => window.elementSdk.setConfig({ secondary_action_color: value })
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['site_title', config.site_title || defaultConfig.site_title],
+          ['hero_title', config.hero_title || defaultConfig.hero_title],
+          ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
+          ['cta_button', config.cta_button || defaultConfig.cta_button]
+        ])
+      });
+    }
+    
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+    
+    // Filter properties
+    function filterProperties(type, btn) {
+      // Update button states
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('active', 'bg-slate-900', 'text-white');
+        b.classList.add('bg-slate-100', 'text-slate-700');
+      });
+      btn.classList.remove('bg-slate-100', 'text-slate-700');
+      btn.classList.add('active', 'bg-slate-900', 'text-white');
+      
+      // Filter cards
+      const cards = document.querySelectorAll('.property-card');
+      cards.forEach(card => {
+        if (type === 'all' || card.dataset.type === type) {
+          card.style.display = 'block';
+          card.style.animation = 'fadeInUp 0.5s ease-out forwards';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+    
+    // Form submission handler
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      showModal();
+      e.target.reset();
+    }
+    
+    // Modal functions
+    function showModal() {
+      const modal = document.getElementById('success-modal');
+      const content = document.getElementById('modal-content');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      setTimeout(() => {
+        content.classList.remove('scale-95', 'opacity-0');
+        content.classList.add('scale-100', 'opacity-100');
+      }, 10);
+    }
+    
+    function closeModal() {
+      const modal = document.getElementById('success-modal');
+      const content = document.getElementById('modal-content');
+      content.classList.remove('scale-100', 'opacity-100');
+      content.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }, 300);
+    }
+    
+    // Close modal on backdrop click
+    document.getElementById('success-modal').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        closeModal();
+      }
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          // Close mobile menu if open
+          document.getElementById('mobile-menu').classList.add('hidden');
+        }
+      });
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d44c566333ebf4c',t:'MTc3MjE2NDc4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
